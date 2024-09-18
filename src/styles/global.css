@@ -44,30 +44,3 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-.container {
-  height: 100dvh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.game-area {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
-}
-
-.player-cards-area {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
-}
-
-.battle-area {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1em;
-}

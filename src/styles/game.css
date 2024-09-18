@@ -1,0 +1,46 @@
+.container {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10em;
+}
+
+.player-cards-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  max-width: 100%;
+}
+
+.battle-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+.player-one-battle-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-two-battle-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-slot {
+  display: flex;
+  justify-content: center;
+}

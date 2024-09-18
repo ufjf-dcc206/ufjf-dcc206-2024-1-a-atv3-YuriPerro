@@ -2,28 +2,35 @@ const pokemonCardTemplate = document.createElement('template');
 
 pokemonCardTemplate.innerHTML = `
     <style>
-        .card {
+        a {
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 10px;
             margin: 10px;
-            width: 200px;
-            display: inline-block;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
-        .card img {
-            width: 100%;
+        a:hover {
+            border-color: '#4f0aff';
+            transition: background-color 0.3s;
+        }
+        .pokemon-name {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 
-    <div class="card">
-        <h3>Bubassauro</h3>
-        <img />
-    </div>
+    <a class="pokemon-card">
+        <slot name="pokemon-name"></slot>
+    </a>
 `;
 
 export class PokemonCard extends HTMLElement {
   #shadow;
-
   constructor() {
     super();
   }
@@ -36,3 +43,5 @@ export class PokemonCard extends HTMLElement {
     this.#shadow.append(clonedCardElement);
   }
 }
+
+customElements.define('pokemon-card', PokemonCard);
