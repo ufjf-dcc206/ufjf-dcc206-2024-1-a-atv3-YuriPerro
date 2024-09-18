@@ -1,13 +1,35 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <script type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="/src/global.css" />
+    <title>Pokemon Game</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div class="container">
+      <h1>Pokemon game</h1>
+
+      <div class="game-area">
+        <div class="player-cards-area">
+          <pokemon-card></pokemon-card>
+          <span>Card 02</span>
+          <span>Card 03</span>
+        </div>
+
+        <div class="batte-area" id="battle-area">
+          <span>Card player One</span>
+          <span>Card player Two</span>
+        </div>
+
+        <div class="player-cards-area">
+          <span>Card 01</span>
+          <span>Card 02</span>
+          <span>Card 03</span>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
