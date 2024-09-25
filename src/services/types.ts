@@ -7,4 +7,10 @@ export type PokemonDetails = {
   name: string;
   id: number;
   weight: number;
+  sprites: {
+    front_default: string;
+  };
+  stats: {
+    base_stat: number;
+  }[];
 };
