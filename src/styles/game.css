@@ -11,15 +11,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 10em;
+  flex-direction: column;
+  gap: 5em;
 }
 
 .player-cards-area {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1em;
+  gap: 1rem;
   max-width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .battle-area {
@@ -43,4 +43,17 @@
 .card-slot {
   display: flex;
   justify-content: center;
+}
+
+.placeholder-cards-area {
+  border: 3px dashed #4e4e4e;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px;
+  width: 180px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
