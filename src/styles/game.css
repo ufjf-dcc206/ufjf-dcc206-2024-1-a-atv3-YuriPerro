@@ -57,3 +57,8 @@
   align-items: center;
   cursor: pointer;
 }
+
+.battle-button {
+  width: 100%;
+  grid-column: 1 / span 2;
+}

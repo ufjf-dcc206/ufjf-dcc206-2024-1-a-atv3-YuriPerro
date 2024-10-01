@@ -2,8 +2,6 @@ import { fetchPokemonDetails, fetchPokemonList } from './services/api';
 import { PokemonDetails, PokemonRaw } from './services/types';
 
 let currentPlayerTurn = 1;
-let playerOnePokemons: PokemonDetails[] = [];
-let playerTwoPokemons: PokemonDetails[] = [];
 let selectedPokemons: PokemonDetails[] = [];
 
 const onSelectPokemon = (pokemon: PokemonDetails) => {
@@ -17,7 +15,11 @@ const onSelectPokemon = (pokemon: PokemonDetails) => {
     updatePlaceholder('player-two-placeholder', pokemon);
   }
 
-  checkWinner();
+  // Enable the battle button if two Pokémon are selected
+  const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
+  if (selectedPokemons.length === 2) {
+    battleButton.disabled = false; // Enable the button
+  }
 };
 
 const updatePlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
@@ -38,7 +40,27 @@ const updatePlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
     cardElement.appendChild(cardNameElement);
     cardElement.appendChild(cardImgElement);
 
+    // Add click event to remove the Pokémon from the placeholder
+    cardElement.addEventListener('click', () => {
+      removePokemonFromPlaceholder(placeholderId, pokemon);
+    });
+
     placeholderElement.appendChild(cardElement);
+  }
+};
+
+// Function to remove Pokémon from the placeholder
+const removePokemonFromPlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
+  const placeholderElement = document.getElementById(placeholderId);
+  if (placeholderElement) {
+    placeholderElement.innerHTML = ''; // Clear the placeholder
+    selectedPokemons = selectedPokemons.filter((p) => p !== pokemon); // Remove from selectedPokemons
+
+    // Disable the battle button if less than 2 Pokémon are selected
+    const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
+    if (selectedPokemons.length < 2) {
+      battleButton.disabled = true; // Disable the button
+    }
   }
 };
 
@@ -58,9 +80,30 @@ const checkWinner = () => {
       alert('Player one wins');
     } else if (playerOneAttack < playerTwoAttack) {
       alert('Player two wins');
-    } else alert('Draw');
+    } else {
+      alert('Draw');
+    }
+
+    // Clear the placeholders after the game ends
+    clearPlaceholders();
 
     selectedPokemons = [];
+
+    // Disable the battle button again
+    const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
+    battleButton.disabled = true; // Disable the button
+  }
+};
+
+const clearPlaceholders = () => {
+  const playerOnePlaceholder = document.getElementById('player-one-placeholder');
+  const playerTwoPlaceholder = document.getElementById('player-two-placeholder');
+
+  if (playerOnePlaceholder) {
+    playerOnePlaceholder.innerHTML = 'Card player One'; // Reset to initial text
+  }
+  if (playerTwoPlaceholder) {
+    playerTwoPlaceholder.innerHTML = 'Card player Two'; // Reset to initial text
   }
 };
 
@@ -121,9 +164,12 @@ const init = async () => {
 
   fillCardsPlayer(playerCardsZoneElementOne, pokemonsPlayerOne);
   fillCardsPlayer(playerCardsZoneElementTwo, pokemonsPlayerTwo);
-
-  playerOnePokemons = pokemonsPlayerOne;
-  playerTwoPokemons = pokemonsPlayerTwo;
 };
+
+// Add event listener for the battle button
+const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
+battleButton.addEventListener('click', () => {
+  checkWinner(); // Check the winner when the button is clicked
+});
 
 init();
