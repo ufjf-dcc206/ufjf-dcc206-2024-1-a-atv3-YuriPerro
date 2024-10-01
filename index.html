@@ -16,12 +16,19 @@
         <div class="player-cards-area" id="player-card-zone-1"></div>
 
         <div class="battle-area" id="battle-area">
-          <div class="player-one-battle-area">
-            <div class="placeholder-cards-area" id="player-one-placeholder">Card player One</div>
+          <div class="player-indicator">
+            <span id="player-one-indicator" class="indicator active">Player 1's Turn</span>
+            <span id="player-two-indicator" class="indicator">Player 2's Turn</span>
           </div>
 
-          <div class="player-two-battle-area">
-            <div class="placeholder-cards-area" id="player-two-placeholder">Card player Two</div>
+          <div class="player-battle-area">
+            <div class="player-one-battle-area">
+              <div class="placeholder-cards-area" id="player-one-placeholder">Card player One</div>
+            </div>
+
+            <div class="player-two-battle-area">
+              <div class="placeholder-cards-area" id="player-two-placeholder">Card player Two</div>
+            </div>
           </div>
 
           <button class="battle-button" id="battle-button" disabled>Start Battle</button>

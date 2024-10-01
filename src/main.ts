@@ -5,6 +5,22 @@ let currentPlayerTurn = 1;
 let selectedPokemons: PokemonDetails[] = [];
 
 const onSelectPokemon = (pokemon: PokemonDetails) => {
+  const playerOnePlaceholder = document.getElementById('player-one-placeholder');
+  const playerTwoPlaceholder = document.getElementById('player-two-placeholder');
+
+  // Check if the corresponding placeholder is empty
+  if (currentPlayerTurn === 1 && playerOnePlaceholder?.innerHTML.trim() !== 'Card player One') {
+    alert('Player One has already selected a Pokémon!');
+    return; // Prevent selection if the placeholder is not empty
+  } else if (
+    currentPlayerTurn === 2 &&
+    playerTwoPlaceholder?.innerHTML.trim() !== 'Card player Two'
+  ) {
+    alert('Player Two has already selected a Pokémon!');
+    return; // Prevent selection if the placeholder is not empty
+  }
+
+  // Proceed with selection if the placeholder is empty
   if (currentPlayerTurn === 1) {
     selectedPokemons = [...selectedPokemons, pokemon];
     currentPlayerTurn = 2;
@@ -14,6 +30,9 @@ const onSelectPokemon = (pokemon: PokemonDetails) => {
     currentPlayerTurn = 1;
     updatePlaceholder('player-two-placeholder', pokemon);
   }
+
+  // Update player indicators
+  updatePlayerIndicators();
 
   // Enable the battle button if two Pokémon are selected
   const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
@@ -49,7 +68,6 @@ const updatePlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
   }
 };
 
-// Function to remove Pokémon from the placeholder
 const removePokemonFromPlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
   const placeholderElement = document.getElementById(placeholderId);
   if (placeholderElement) {
@@ -166,10 +184,30 @@ const init = async () => {
   fillCardsPlayer(playerCardsZoneElementTwo, pokemonsPlayerTwo);
 };
 
-// Add event listener for the battle button
 const battleButton = document.getElementById('battle-button') as HTMLButtonElement;
 battleButton.addEventListener('click', () => {
-  checkWinner(); // Check the winner when the button is clicked
+  checkWinner();
 });
+
+const updatePlayerIndicators = () => {
+  const playerOneIndicator = document.getElementById('player-one-indicator');
+  const playerTwoIndicator = document.getElementById('player-two-indicator');
+
+  if (!playerOneIndicator || !playerTwoIndicator) {
+    throw new Error('Player indicators not found');
+  }
+
+  if (currentPlayerTurn === 1) {
+    playerOneIndicator.classList.add('active');
+    playerOneIndicator.classList.remove('inactive');
+    playerTwoIndicator.classList.remove('active');
+    playerTwoIndicator.classList.add('inactive');
+  } else {
+    playerTwoIndicator.classList.add('active');
+    playerTwoIndicator.classList.remove('inactive');
+    playerOneIndicator.classList.remove('active');
+    playerOneIndicator.classList.add('inactive');
+  }
+};
 
 init();

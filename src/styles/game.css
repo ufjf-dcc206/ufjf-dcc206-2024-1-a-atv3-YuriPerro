@@ -23,9 +23,10 @@
 }
 
 .battle-area {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .player-one-battle-area {
@@ -61,4 +62,32 @@
 .battle-button {
   width: 100%;
   grid-column: 1 / span 2;
+}
+
+.player-indicator {
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.player-battle-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.indicator {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.active {
+  background-color: #ff005d;
+  color: white;
+}
+
+.inactive {
+  background-color: #ccc;
+  color: black;
 }
