@@ -13,4 +13,11 @@ export type PokemonDetails = {
   stats: {
     base_stat: number;
   }[];
+  types: [
+    {
+      type: {
+        name: string;
+      };
+    }
+  ];
 };

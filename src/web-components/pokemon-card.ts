@@ -23,7 +23,7 @@ pokemonCardTemplate.innerHTML = `
         transition: border 0.3s ease;
       }
       .pokemon-name {
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         font-weight: bold;
         text-align: center;
         font-family: 'Roboto', sans-serif;
@@ -38,8 +38,27 @@ pokemonCardTemplate.innerHTML = `
         padding-bottom: 5px;
         margin-top: 20px;
       }
-      .pokemon-image {
-        background-color: #f0f0f0;
+      .pokemon-types-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .container-type {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ff005d;
+        border-radius: 100px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .pokemon-type {
+        color: white;
+        padding: 5px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
       }
     </style>
 
@@ -47,6 +66,12 @@ pokemonCardTemplate.innerHTML = `
       <slot name="pokemon-image"></slot>
       <div class="name-container">
         <slot name="pokemon-name" class="pokemon-name"></slot>
+      </div>
+
+      <div class="pokemon-types-container">
+        <div class="container-type">
+          <slot name="pokemon-type" class="pokemon-type"></slot>
+        </div>
       </div>
     </a>
 `;

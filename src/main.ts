@@ -10,12 +10,36 @@ const onSelectPokemon = (pokemon: PokemonDetails) => {
   if (currentPlayerTurn === 1) {
     selectedPokemons = [...selectedPokemons, pokemon];
     currentPlayerTurn = 2;
+    updatePlaceholder('player-one-placeholder', pokemon);
   } else if (currentPlayerTurn === 2) {
     selectedPokemons = [...selectedPokemons, pokemon];
     currentPlayerTurn = 1;
+    updatePlaceholder('player-two-placeholder', pokemon);
   }
 
   checkWinner();
+};
+
+const updatePlaceholder = (placeholderId: string, pokemon: PokemonDetails) => {
+  const placeholderElement = document.getElementById(placeholderId);
+  if (placeholderElement) {
+    placeholderElement.innerHTML = ''; // Clear previous content
+    const cardElement = document.createElement('pokemon-card');
+    const cardNameElement = document.createElement('p');
+    const cardImgElement = document.createElement('img');
+
+    cardImgElement.slot = 'pokemon-image';
+    cardNameElement.slot = 'pokemon-name';
+
+    cardNameElement.textContent = pokemon.name;
+    cardImgElement.src = pokemon.sprites.front_default;
+    cardImgElement.alt = pokemon.name;
+
+    cardElement.appendChild(cardNameElement);
+    cardElement.appendChild(cardImgElement);
+
+    placeholderElement.appendChild(cardElement);
+  }
 };
 
 const checkWinner = () => {
@@ -51,9 +75,17 @@ const fillCardsPlayer = (
 
     cardImgElement.slot = 'pokemon-image';
     cardNameElement.slot = 'pokemon-name';
+
     cardNameElement.textContent = pokemon.name;
     cardImgElement.src = pokemon.sprites.front_default;
     cardImgElement.alt = pokemon.name;
+
+    pokemon.types.forEach((type) => {
+      const cardTypesElement = document.createElement('span');
+      cardTypesElement.slot = 'pokemon-type';
+      cardTypesElement.textContent = type.type.name;
+      cardElement.appendChild(cardTypesElement);
+    });
 
     cardElement.appendChild(cardNameElement);
     cardElement.appendChild(cardImgElement);
